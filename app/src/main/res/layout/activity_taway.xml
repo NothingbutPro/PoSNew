@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ics.restaurantapp.activities.TAwayActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_ta"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#FF314A8B">
+
+        <TextView
+            android:text="Take Away"
+            android:textSize="14dp"
+            android:typeface="serif"
+            android:textColor="#fff"
+            android:gravity="start|center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/lout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rec_shp"
+        android:padding="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Take Away"
+            android:textColor="@color/orange"
+            android:textSize="30dp"
+            android:textStyle="bold|normal" />
+
+
+        <EditText
+            android:id="@+id/mob"
+            android:layout_width="450dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:background="@drawable/rec_shp"
+            android:hint="Mobile Number"
+            android:inputType="number"
+            android:padding="5dp"
+            android:textSize="13dp" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="450dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:background="@drawable/rec_shp"
+            android:hint="Name"
+            android:inputType="text"
+            android:padding="5dp"
+            android:textSize="13dp" />
+
+        <EditText
+            android:id="@+id/adress"
+            android:layout_width="450dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:background="@drawable/rec_shp"
+            android:hint="Address"
+            android:inputType="text"
+            android:padding="5dp"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            android:background="@color/blue"
+            android:text="Submit"
+            android:textColor="#fff" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

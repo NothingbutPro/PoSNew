@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ics.restaurantapp">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".Utils.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/res"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.Header_Footer_Act"
+            android:screenOrientation="landscape"
+            ></activity>
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.DineActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.BillActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.DayCloseActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.TakeAwayActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.DinelistActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.ReportActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.OverAllTransActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.WaiterListActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.TAwayActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.NewActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.BillSectionActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.OrderListNew"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.SyncActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.ConfrigationSetting"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.ConfigActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.DeviceListActivity"
+            android:screenOrientation="landscape" />
+
+        <receiver
+            android:name=".receiver.InternetConnector_Receiver"
+            android:enabled="true">
+            <intent-filter>
+
+                <!-- Intent filters for broadcast receiver -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".Mid_Delay_Activity"
+            android:screenOrientation="landscape" />
+
+        <service android:name=".receiver.BlueServiceOnce" />
+        <service android:name=".receiver.BlueServiceFree" />
+
+        <activity
+            android:name=".Delay_From_Bill"
+            android:screenOrientation="landscape" />
+    </application>
+
+</manifest>

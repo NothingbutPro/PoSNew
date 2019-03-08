@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ics.restaurantapp.activities.SyncActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_sync"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#FF314A8B">
+
+        <TextView
+            android:text="Restaurant"
+            android:textSize="14dp"
+            android:typeface="serif"
+            android:textColor="#fff"
+            android:gravity="start|center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_below="@+id/toolbar_sync"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+           android:gravity="center"
+            android:id="@+id/sync_btn"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            app:cardCornerRadius="8dp"
+            android:layout_margin="3dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/sync_data"
+                android:src="@drawable/sync"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+
+        </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Sync Data"
+                android:gravity="center"
+                android:textColor="#000"
+                android:padding="5dp"
+                android:textSize="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progress1"
+                android:layout_weight="0.333"
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:layout_marginBottom="3dp"
+                style="@style/CustomProgressBarHorizontal"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

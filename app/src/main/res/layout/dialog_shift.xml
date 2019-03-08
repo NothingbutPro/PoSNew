@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="450dp"
+    android:layout_height="230dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Shift Table"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:padding="10dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:textColorHint="#000">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Existing Table"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/exist_table"
+                android:textColor="#000"
+                android:textSize="13dp"
+                android:typeface="serif"
+                android:hint="Existing Table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+       <Spinner
+           android:id="@+id/spin_table"
+           android:layout_marginRight="10dp"
+           android:layout_marginLeft="10dp"
+           android:layout_marginBottom="10dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+       </Spinner>
+
+        <LinearLayout
+            android:background="#e9e8e8"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp">
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/shift_cancel"
+            android:text="Cancel"
+            android:layout_weight="1"
+            android:textSize="13dp"
+            android:typeface="serif"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/rec_orange"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <Button
+            android:id="@+id/shift_update"
+            android:text="Update"
+            android:layout_weight="1"
+            android:textSize="13dp"
+            android:typeface="serif"
+            android:background="@drawable/rec_orange"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

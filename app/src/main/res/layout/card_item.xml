@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_id"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_dummy_rate"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_sgst_tax"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_cgst_tax"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_igst_tax"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_dummy_sgst_tax"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_dummy_vat_tax"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_vat_tax"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_dummy_cgst_tax"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/item_dummy_igst_tax"/>
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/minus_"
+                android:layout_weight="0.40"
+                android:src="@drawable/ic_min"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+           <TextView
+               android:id="@+id/quantity"
+               android:layout_weight="0.30"
+               android:text="1"
+               android:textColor="#000"
+               android:gravity="center"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_weight="0.40"
+                android:id="@+id/plus_"
+                android:src="@drawable/ic_plus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/rate"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/delete"
+            android:src="@drawable/ic_delete"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

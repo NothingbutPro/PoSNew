@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/serial_number"
+            android:layout_weight="0.20"
+            android:textColor="#000"
+            android:textSize="13dp"
+            android:typeface="serif"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/itm_name"
+            android:layout_weight="0.20"
+            android:textColor="#000"
+            android:textSize="13dp"
+            android:gravity="center"
+            android:typeface="serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_weight="0.20"
+            android:textColor="#000"
+            android:textSize="13dp"
+            android:typeface="serif"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/qunty"
+            android:layout_weight="0.20"
+            android:textColor="#000"
+            android:textSize="13dp"
+            android:typeface="serif"
+            android:text="1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/list_total"
+            android:layout_weight="0.20"
+            android:textColor="#000"
+            android:textSize="13dp"
+            android:typeface="serif"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
