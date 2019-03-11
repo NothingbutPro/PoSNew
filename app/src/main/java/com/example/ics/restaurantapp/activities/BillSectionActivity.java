@@ -254,38 +254,38 @@ public class BillSectionActivity extends AppCompatActivity {
 
         try{
             String broken_idea = areases.substring(0,3);
-                     //  Cursor discursor = dbdisHelper.getData("SELECT * FROM WAITER_DISCOUNT_ACCOUNT WHERE Waiter_id = "+strPrefWaitID + " AND Waiter_table = "+strPrifTableNo);
-                       Cursor discursor = dbdisHelper.getData("SELECT * FROM WAITER_DISCOUNT_ACCOUNT");
-                       if(discursor != null && discursor.getCount() > 0)
-                       {
-                           while (discursor.moveToNext()) {
-                               String whichtable = discursor.getString(2);
+            //  Cursor discursor = dbdisHelper.getData("SELECT * FROM WAITER_DISCOUNT_ACCOUNT WHERE Waiter_id = "+strPrefWaitID + " AND Waiter_table = "+strPrifTableNo);
+            Cursor discursor = dbdisHelper.getData("SELECT * FROM WAITER_DISCOUNT_ACCOUNT");
+            if(discursor != null && discursor.getCount() > 0)
+            {
+                while (discursor.moveToNext()) {
+                    String whichtable = discursor.getString(2);
 
-                               String areadb =  discursor.getString(5);
-                               if(whichtable.equals(strPrifTableNo) && areadb.contains(areases))
-                               {
-                                   Toast.makeText(this, "already discount "+strPrifTableNo, Toast.LENGTH_SHORT).show();
-                                   Log.e("string" , "at aklready dis"+whichtable);
-                                   alreadyDiscount = discursor.getString(4);
-                                   Double truncatedDicount = BigDecimal.valueOf(Double.valueOf(alreadyDiscount))
-                                           .setScale(3, RoundingMode.HALF_UP)
-                                           .doubleValue();
+                    String areadb =  discursor.getString(5);
+                    if(whichtable.equals(strPrifTableNo) && areadb.contains(areases))
+                    {
+                        Toast.makeText(this, "already discount "+strPrifTableNo, Toast.LENGTH_SHORT).show();
+                        Log.e("string" , "at aklready dis"+whichtable);
+                        alreadyDiscount = discursor.getString(4);
+                        Double truncatedDicount = BigDecimal.valueOf(Double.valueOf(alreadyDiscount))
+                                .setScale(3, RoundingMode.HALF_UP)
+                                .doubleValue();
 
-                                   dicount.setText(String.valueOf(truncatedDicount));
+                        dicount.setText(String.valueOf(truncatedDicount));
 
-                                   Float y;
-                                   float x = (float) Math.floor(bill_amount + bill_tax - discountedAmount);
-                                   y = (float) (bill_amount + bill_tax - discountedAmount - x);
+                        Float y;
+                        float x = (float) Math.floor(bill_amount + bill_tax - discountedAmount);
+                        y = (float) (bill_amount + bill_tax - discountedAmount - x);
 
-                                   roundOff.setText(String.valueOf(y));
+                        roundOff.setText(String.valueOf(y));
 
-                                   tatal_amount.setText(String.valueOf(x));
-                                   amountPaid1.setText(String.valueOf(x));
-                                   amountPaid.setText(String.valueOf(x));
-                               }
-                               Log.e("already is ",""+alreadyDiscount);
-                           }
-                       }
+                        tatal_amount.setText(String.valueOf(x));
+                        amountPaid1.setText(String.valueOf(x));
+                        amountPaid.setText(String.valueOf(x));
+                    }
+                    Log.e("already is ",""+alreadyDiscount);
+                }
+            }
 //            if(discursor !=null)
 //            {
 //             //   discursor.moveToFirst();
@@ -410,7 +410,7 @@ public class BillSectionActivity extends AppCompatActivity {
 //              Toast.makeText(this, "New waiter", Toast.LENGTH_SHORT).show();
 //          }
 
-       Log.e("on" , "create called");
+        Log.e("on" , "create called");
 //        getDisCursor=  orderDatabseHelper.getDiscountByTable2(strPrefWaitID,strPrifTableNo , strPrefWaitName);
 //        if (getDisCursor != null)
 //            if (getDisCursor.moveToFirst()) {
@@ -572,7 +572,7 @@ public class BillSectionActivity extends AppCompatActivity {
                         "------------------------\n";
 
 
-                // bill = Header;
+                bill = Header;
                 //bill = Header;
 //                String amt = null ;
                 while (localCursor.moveToNext()) {
@@ -661,13 +661,13 @@ public class BillSectionActivity extends AppCompatActivity {
                     if (s2.length()== 3)
                     {
                         String items2 = s1 + "         " + s2 + "       " + s3 + "\n";
-                  //      bill = bill + items + items2;
+                        bill = bill + items + items2;
                     }
                     else
-                        {
+                    {
 
                         String items2 = s1 + "          " + s2 + "        " + s3 + "\n";
-                      //  bill = bill + items + items2;
+                        bill = bill + items + items2;
                     }
 
                     i++;
@@ -692,8 +692,8 @@ public class BillSectionActivity extends AppCompatActivity {
                             alreadyDiscount = "00";
 //                            Toast.makeText(BillSectionActivity.this, "discount at 3"+discount_amount.getText().length(), Toast.LENGTH_SHORT).show();
 //
-//                            String footer = "-----------------------" + " TAX                  " + txt + "\n" + "DISCOUNT            " + alreadyDiscount.concat(".0") + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
-//                            bill = bill + footer;
+                            // String footer = "-----------------------" + " TAX                  " + txt + "\n" + "DISCOUNT            " + alreadyDiscount.concat(".0") + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
+                            //   bill = bill + footer;
 
 
                         }
@@ -703,7 +703,7 @@ public class BillSectionActivity extends AppCompatActivity {
                             Toast.makeText(BillSectionActivity.this, "discount at 3"+discount_amount.getText().length(), Toast.LENGTH_SHORT).show();
 
                             String footer = "-----------------------" + " TAX                  " + txt + "\n" + "DISCOUNT            " + alreadyDiscount.concat(".0") + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
-                           // bill = bill + footer;
+                            bill = bill + footer;
 
 
                         }
@@ -714,17 +714,17 @@ public class BillSectionActivity extends AppCompatActivity {
                             bill = bill + footer;
                         }
                         if( (alreadyDiscount.length() ==3) && txt.length() ==3)
-                       {
-                        Toast.makeText(BillSectionActivity.this, "discount at 5"+discount_amount.getText().length(), Toast.LENGTH_SHORT).show();
-                        String footer = "-----------------------" + " TAX                 " + txt + "\n" + "DISCOUNT          " + alreadyDiscount.concat(".0") + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
-                        bill = bill + footer;
-                      }
-                      if( (alreadyDiscount.length() ==3) && txt.length() ==3)
-                       {
-                        Toast.makeText(BillSectionActivity.this, "discount at 5"+discount_amount.getText().length(), Toast.LENGTH_SHORT).show();
-                        String footer = "-----------------------" + " TAX                 " + txt + "\n" + "DISCOUNT          " + alreadyDiscount.concat(".0") + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
-                        bill = bill + footer;
-                      }
+                        {
+                            Toast.makeText(BillSectionActivity.this, "discount at 5"+discount_amount.getText().length(), Toast.LENGTH_SHORT).show();
+                            String footer = "-----------------------" + " TAX                 " + txt + "\n" + "DISCOUNT          " + alreadyDiscount.concat(".0") + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
+                            bill = bill + footer;
+                        }
+                        if( (alreadyDiscount.length() ==3) && txt.length() ==3)
+                        {
+                            Toast.makeText(BillSectionActivity.this, "discount at 5"+discount_amount.getText().length(), Toast.LENGTH_SHORT).show();
+                            String footer = "-----------------------" + " TAX                 " + txt + "\n" + "DISCOUNT          " + alreadyDiscount.concat(".0") + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
+                            bill = bill + footer;
+                        }
 
                         if( (alreadyDiscount.length() ==3) && txt.length() ==4)
                         {
@@ -738,7 +738,7 @@ public class BillSectionActivity extends AppCompatActivity {
                 catch (Exception e)
                 {
                     String footer = "-----------------------" + " TAX                 " + txt + "\n" + "DISCOUNT            " + alreadyDiscount + "\nTotal              " + tt + "\n" + "------------------------" + "THANK YOU! VISIT AGAIN!!" + "------------------------";
-                //    bill = bill + footer;
+                    bill = bill + footer;
                 }
 
 
@@ -754,439 +754,10 @@ public class BillSectionActivity extends AppCompatActivity {
                     format[2] = ((byte) (0x06 | arrayOfByte1[2]));
                     format[2] = ((byte) (0x20 | arrayOfByte1[2]));
                     format[2] = ((byte) (0x8 | arrayOfByte1[2]));
-              //      mService.write(format);
+                    //      mService.write(format);
                     monceService.write(format);
                     //for RESTaurants
                     if(sessionManager.getKeyBillResName().length() ==2)
-                    {
-                        if(sessionManager.getKeyBillResType().length() ==2)
-                        {
-                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
-                        }
-                        if(sessionManager.getKeyBillResType().length() ==3)
-                    {
-                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==4)
-                    {
-                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==5)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==6)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==7)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==8)
-                    {
-                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==9)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==10)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==11)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==12)
-                    {
-                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==13)
-                    {
-                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==14)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==15)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==16)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==17)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==18)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==19)
-                    {
-                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==20)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==21)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==22)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==23)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==24)
-                    {
-                        Addressbill1 =  sessionManager.getKeyBillResType();
-                    }
-
-                    //For address 2
-                     if(sessionManager.getKeyBillResType2().length() !=0 )
-                     {
-                         if(sessionManager.getKeyBillResType2().length() ==2)
-                         {
-                             Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
-                         }
-                         if(sessionManager.getKeyBillResType2().length() ==3)
-                         {
-                             Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
-                         }  if(sessionManager.getKeyBillResType2().length() ==4)
-                     {
-                         Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
-                     }  if(sessionManager.getKeyBillResType2().length() ==5)
-                     {
-                         Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
-                     }  if(sessionManager.getKeyBillResType2().length() ==6)
-                     {
-                         Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
-                     }  if(sessionManager.getKeyBillResType2().length() ==7)
-                     {
-                         Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
-                     } if(sessionManager.getKeyBillResType2().length() ==8)
-                     {
-                         Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
-                     } if(sessionManager.getKeyBillResType2().length() ==9)
-                     {
-                         Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
-                     } if(sessionManager.getKeyBillResType2().length() ==10)
-                     {
-                         Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
-                     } if(sessionManager.getKeyBillResType2().length() ==11)
-                     {
-                         Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
-                     } if(sessionManager.getKeyBillResType2().length() ==12)
-                     {
-                         Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
-                     } if(sessionManager.getKeyBillResType2().length() ==13)
-                     {
-                         Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==14)
-                     {
-                         Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==15)
-                     {
-                         Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==16)
-                     {
-                         Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==17)
-                     {
-                         Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==18)
-                     {
-                         Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==19)
-                     {
-                         Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==20)
-                     {
-                         Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==21)
-                     {
-                         Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==22)
-                     {
-                         Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==23)
-                     {
-                         Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
-                     }if(sessionManager.getKeyBillResType2().length() ==24)
-                     {
-                         Addressbill2 =  sessionManager.getKeyBillResType2();
-                     }
-
-                         //For address 2
-                         if(sessionManager.getKeyBillResType2().length() !=0 )
-                         {
-
-                             monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                         }else {
-                             monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                         }
-
-                    //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                     }
-                     else {
-                         monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                     }
-
-                    }
-                    else
-                        if(sessionManager.getKeyBillResName().length() ==3)
-                    {
-                        if(sessionManager.getKeyBillResType().length() ==2)
-                        {
-                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
-                        }
-                        if(sessionManager.getKeyBillResType().length() ==3)
-                        {
-                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                        }  if(sessionManager.getKeyBillResType().length() ==4)
-                      {
-                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                     }
-                     if(sessionManager.getKeyBillResType().length() ==5)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==6)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==7)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==8)
-                    {
-                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==9)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==10)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==11)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==12)
-                    {
-                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==13)
-                    {
-                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==14)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==15)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==16)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==17)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==18)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==19)
-                    {
-                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==20)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==21)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==22)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==23)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==24)
-                    {
-                        Addressbill1 =  sessionManager.getKeyBillResType();
-                    }
-                        monceService.sendMessage("         "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() + " RESTAURANT"+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                    }
-                    else
-
-                        if(sessionManager.getKeyBillResName().length() ==4)
-                    {
-                        if(sessionManager.getKeyBillResType().length() ==2)
-                        {
-                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
-                        }
-                        if(sessionManager.getKeyBillResType().length() ==3)
-                        {
-                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                        }  if(sessionManager.getKeyBillResType().length() ==4)
-                    {
-                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                    }  if(sessionManager.getKeyBillResType().length() ==5)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }  if(sessionManager.getKeyBillResType().length() ==6)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }  if(sessionManager.getKeyBillResType().length() ==7)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==8)
-                    {
-                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==9)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==10)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==11)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==12)
-                    {
-                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==13)
-                    {
-                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==14)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==15)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==16)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==17)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==18)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==19)
-                    {
-                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==20)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==21)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==22)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==23)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==24)
-                    {
-                        Addressbill1 =  sessionManager.getKeyBillResType();
-                    }
-                        monceService.sendMessage("         "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() + " RESTAURANT"+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                    }
-
-
-
-                    else
-
-                        if(sessionManager.getKeyBillResName().length() ==5)
-                    {
-                        if(sessionManager.getKeyBillResType().length() ==2)
-                        {
-                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
-                        }
-                        if(sessionManager.getKeyBillResType().length() ==3)
-                        {
-                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                        }  if(sessionManager.getKeyBillResType().length() ==4)
-                    {
-                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                    }  if(sessionManager.getKeyBillResType().length() ==5)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }  if(sessionManager.getKeyBillResType().length() ==6)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }  if(sessionManager.getKeyBillResType().length() ==7)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==8)
-                    {
-                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==9)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==10)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==11)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==12)
-                    {
-                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
-                    } if(sessionManager.getKeyBillResType().length() ==13)
-                    {
-                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==14)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==15)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==16)
-                    {
-                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==17)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==18)
-                    {
-                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==19)
-                    {
-                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==20)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==21)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==22)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==23)
-                    {
-                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }if(sessionManager.getKeyBillResType().length() ==24)
-                    {
-                        Addressbill1 =  sessionManager.getKeyBillResType();
-                    }
-                        monceService.sendMessage("         "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() +"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                    }
-
-
-                    else
-
-
-                        if(sessionManager.getKeyBillResName().length() ==6)
                     {
                         if(sessionManager.getKeyBillResType().length() ==2)
                         {
@@ -1197,95 +768,350 @@ public class BillSectionActivity extends AppCompatActivity {
                             Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
                         }
                         if(sessionManager.getKeyBillResType().length() ==4)
-                    {
-                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==5)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==6)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==7)
-                    {
-                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==8)
-                    {
-                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==9)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==10)
-                    {
-                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==11)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==5)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==6)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==7)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==8)
+                        {
+                            Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==9)
+                        {
+                            Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                        } if(sessionManager.getKeyBillResType().length() ==10)
                     {
                         Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==12)
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
                     {
                         Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==13)
+                    } if(sessionManager.getKeyBillResType().length() ==13)
                     {
                         Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==14)
+                    }if(sessionManager.getKeyBillResType().length() ==14)
                     {
                         Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==15)
+                    }if(sessionManager.getKeyBillResType().length() ==15)
                     {
                         Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==16)
+                    }if(sessionManager.getKeyBillResType().length() ==16)
                     {
                         Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==17)
+                    }if(sessionManager.getKeyBillResType().length() ==17)
                     {
                         Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==18)
+                    }if(sessionManager.getKeyBillResType().length() ==18)
                     {
                         Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==19)
+                    }if(sessionManager.getKeyBillResType().length() ==19)
                     {
                         Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==20)
+                    }if(sessionManager.getKeyBillResType().length() ==20)
                     {
                         Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==21)
+                    }if(sessionManager.getKeyBillResType().length() ==21)
                     {
                         Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==22)
+                    }if(sessionManager.getKeyBillResType().length() ==22)
                     {
                         Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==23)
+                    }if(sessionManager.getKeyBillResType().length() ==23)
                     {
                         Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
-                    }
-                    if(sessionManager.getKeyBillResType().length() ==24)
+                    }if(sessionManager.getKeyBillResType().length() ==24)
                     {
                         Addressbill1 =  sessionManager.getKeyBillResType();
                     }
-                        monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() +"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                    }
+                    else
+                    if(sessionManager.getKeyBillResName().length() ==3)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==5)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==6)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==7)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==8)
+                        {
+                            Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==9)
+                        {
+                            Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==10)
+                        {
+                            Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==11)
+                        {
+                            Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==12)
+                        {
+                            Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==13)
+                        {
+                            Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==14)
+                        {
+                            Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==15)
+                        {
+                            Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==16)
+                        {
+                            Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==17)
+                        {
+                            Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==18)
+                        {
+                            Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==19)
+                        {
+                            Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==20)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==21)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==22)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==23)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("         "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() + " RESTAURANT"+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
                     }
                     else
 
-
-                        if(sessionManager.getKeyBillResName().length() ==7)
+                    if(sessionManager.getKeyBillResName().length() ==4)
                     {
                         if(sessionManager.getKeyBillResType().length() ==2)
                         {
@@ -1358,12 +1184,532 @@ public class BillSectionActivity extends AppCompatActivity {
                     {
                         Addressbill1 =  sessionManager.getKeyBillResType();
                     }
+                        monceService.sendMessage("         "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() + " RESTAURANT"+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
 
-                        monceService.sendMessage("        "+sessionManager.getKeyBillResName()+"\n"+sessionManager.getKeyBillResType()+"        "+sessionManager.getKeyBillResType2()+"\n" + htmlAsSpanned + "\n------------------------", "GBK");
+                    //phase 2
+
+                    else
+
+                    if(sessionManager.getKeyBillResName().length() ==5)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==24)
+                    {
+                        Addressbill1 =  sessionManager.getKeyBillResType();
+                    }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        // monceService.sendMessage("         "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() +"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+
+
+                    else
+
+
+                    if(sessionManager.getKeyBillResName().length() ==6)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==4)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==5)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==6)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==7)
+                        {
+                            Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==8)
+                        {
+                            Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==9)
+                        {
+                            Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==10)
+                        {
+                            Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==11)
+                        {
+                            Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==12)
+                        {
+                            Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==13)
+                        {
+                            Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==14)
+                        {
+                            Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==15)
+                        {
+                            Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==16)
+                        {
+                            Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==17)
+                        {
+                            Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==18)
+                        {
+                            Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==19)
+                        {
+                            Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==20)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==21)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==22)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==23)
+                        {
+                            Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //   monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType() +"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    else
+
+                    if(sessionManager.getKeyBillResName().length() ==7)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==24)
+                    {
+                        Addressbill1 =  sessionManager.getKeyBillResType();
+                    }
+                        //For address 2
+                        if( sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("        "+sessionManager.getKeyBillResName()+"\n "+Addressbill1+"\n "+Addressbill2+"\n      " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n "+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+"\n"+sessionManager.getKeyBillResType()+"        "+sessionManager.getKeyBillResType2()+"\n" + htmlAsSpanned + "\n------------------------", "GBK");
                     } else
 
 
-                        if(sessionManager.getKeyBillResName().length() ==8)
+                    if(sessionManager.getKeyBillResName().length() ==8)
                     {
                         if(sessionManager.getKeyBillResType().length() ==2)
                         {
@@ -1433,19 +1779,2413 @@ public class BillSectionActivity extends AppCompatActivity {
                     {
                         Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
                     }
-                    if(sessionManager.getKeyBillResType().length() ==24)
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+
+                    if(sessionManager.getKeyBillResName().length() ==9)
                     {
-                        Addressbill1 =  sessionManager.getKeyBillResType();
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
                     }
-                        monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
                     }
+                    if(sessionManager.getKeyBillResName().length() ==10)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
 
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
 
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    if(sessionManager.getKeyBillResName().length() ==11)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    if(sessionManager.getKeyBillResName().length() ==12)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    if(sessionManager.getKeyBillResName().length() ==13)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    if(sessionManager.getKeyBillResName().length() ==14)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //14
+                    if(sessionManager.getKeyBillResName().length() ==15)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //15
+                    if(sessionManager.getKeyBillResName().length() ==16)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //16
+                    if(sessionManager.getKeyBillResName().length() ==17)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //17
+                    if(sessionManager.getKeyBillResName().length() ==18)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //18
+                    if(sessionManager.getKeyBillResName().length() ==19)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //19
+                    if(sessionManager.getKeyBillResName().length() ==20)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //20
+                    if(sessionManager.getKeyBillResName().length() ==21)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    //21
+                    if(sessionManager.getKeyBillResName().length() ==22)
+                    {
+                        if(sessionManager.getKeyBillResType().length() ==2)
+                        {
+                            Addressbill1 = Addressbill1+ "           "+sessionManager.getKeyBillResType();
+                        }
+                        if(sessionManager.getKeyBillResType().length() ==3)
+                        {
+                            Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                        }  if(sessionManager.getKeyBillResType().length() ==4)
+                    {
+                        Addressbill1 = Addressbill1+ "        "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==5)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==6)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    }  if(sessionManager.getKeyBillResType().length() ==7)
+                    {
+                        Addressbill1 = Addressbill1+ "       "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==8)
+                    {
+                        Addressbill1 = Addressbill1+ "      "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==9)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==10)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==11)
+                    {
+                        Addressbill1 = Addressbill1+ "     "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==12)
+                    {
+                        Addressbill1 = Addressbill1+ "    "+sessionManager.getKeyBillResType();
+                    } if(sessionManager.getKeyBillResType().length() ==13)
+                    {
+                        Addressbill1 = Addressbill1+ "   "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==14)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==15)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==16)
+                    {
+                        Addressbill1 = Addressbill1+ "  "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==17)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==18)
+                    {
+                        Addressbill1 = Addressbill1+ " "+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==19)
+                    {
+                        Addressbill1 = Addressbill1+ ""+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==20)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==21)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==22)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }if(sessionManager.getKeyBillResType().length() ==23)
+                    {
+                        Addressbill1 = Addressbill1+sessionManager.getKeyBillResType();
+                    }
+                        if(sessionManager.getKeyBillResType().length() ==24)
+                        {
+                            Addressbill1 =  sessionManager.getKeyBillResType();
+                        }
+                        //For address 2
+                        if(sessionManager.getKeyBillResType2().length() !=0 )
+                        {
+                            if(sessionManager.getKeyBillResType2().length() ==2)
+                            {
+                                Addressbill2 = Addressbill2+ "           "+sessionManager.getKeyBillResType2();
+                            }
+                            if(sessionManager.getKeyBillResType2().length() ==3)
+                            {
+                                Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                            }  if(sessionManager.getKeyBillResType2().length() ==4)
+                        {
+                            Addressbill2 = Addressbill2+ "        "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==5)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==6)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        }  if(sessionManager.getKeyBillResType2().length() ==7)
+                        {
+                            Addressbill2 = Addressbill2+ "       "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==8)
+                        {
+                            Addressbill2 = Addressbill2+ "      "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==9)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==10)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==11)
+                        {
+                            Addressbill2 = Addressbill2+ "     "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==12)
+                        {
+                            Addressbill2 = Addressbill2+ "    "+sessionManager.getKeyBillResType2();
+                        } if(sessionManager.getKeyBillResType2().length() ==13)
+                        {
+                            Addressbill2 = Addressbill2+ "   "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==14)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==15)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==16)
+                        {
+                            Addressbill2 = Addressbill2+ "  "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==17)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==18)
+                        {
+                            Addressbill2 = Addressbill2+ " "+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==19)
+                        {
+                            Addressbill2 = Addressbill2+ ""+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==20)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==21)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==22)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==23)
+                        {
+                            Addressbill2 = Addressbill2+sessionManager.getKeyBillResType2();
+                        }if(sessionManager.getKeyBillResType2().length() ==24)
+                        {
+                            Addressbill2 =  sessionManager.getKeyBillResType2();
+                        }
+
+                            //For address 2
+                            if(sessionManager.getKeyBillResType2().length() !=0 )
+                            {
+
+                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                            }
+
+                            //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+
+                        else {
+                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        }
+                        //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
+                    else{
+                        monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                    }
                     //
-             //       mService.sendMessage("       SAGAR VIEW\n" + "    5-STAR RESTAURANT\n" + "       " + htmlAsSpanned + "\n------------------------", "GBK");
+                    //       mService.sendMessage("       SAGAR VIEW\n" + "    5-STAR RESTAURANT\n" + "       " + htmlAsSpanned + "\n------------------------", "GBK");
 
-             //       mService.sendMessage(bill, "GBK");
-                //    monceService.sendMessage(bill, "GBK");
+                    // mService.sendMessage(bill, "GBK");
+                    monceService.sendMessage(bill, "GBK");
                 } else if ((lang.compareTo("ch")) == 0) {
                     // Bold
                     format[2] = ((byte) (0x10 | arrayOfByte1[2]));
@@ -1660,8 +4400,8 @@ public class BillSectionActivity extends AppCompatActivity {
                 values.put(DiscountReaderContract.FeedEntry.Waiter_Discount, disAmo);
 
 // Insert the new row, returning the primary key value of the new row
-            //    discountDbHelper.Insert_Wait_Discount(strPrefWaitID,strPrifTableNo,strPrefWaitName,disAmo);
-               // long newRowId = orderDatabseHelper.insert(DiscountReaderContract.FeedEntry.TABLE_NAME, null, values);
+                //    discountDbHelper.Insert_Wait_Discount(strPrefWaitID,strPrifTableNo,strPrefWaitName,disAmo);
+                // long newRowId = orderDatabseHelper.insert(DiscountReaderContract.FeedEntry.TABLE_NAME, null, values);
 //                Boolean newRowId = discountDatabaseHelper.insertNewWAITER_DISCOUNT(strPrefWaitID, strPrifTableNo, strPrefWaitName , disAmo);
 
                 dbdisHelper.insertDatatoAccount(strPrefWaitID, strPrifTableNo, strPrefWaitName, disAmo , sessionManager.getKeyUserArea());
@@ -1774,8 +4514,8 @@ public class BillSectionActivity extends AppCompatActivity {
                 } else {
                     if (i > 0) {
                         try {
-                           Boolean p= dbdisHelper.Emptythetable(strPrifTableNo , sessionManager.getKeyUserArea());
-                           Log.e("dfndsfn", ""+p);
+                            Boolean p= dbdisHelper.Emptythetable(strPrifTableNo , sessionManager.getKeyUserArea());
+                            Log.e("dfndsfn", ""+p);
                         }catch (Exception e)
                         {
                             e.printStackTrace();
@@ -1852,18 +4592,18 @@ public class BillSectionActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= 10){
             try {
                 final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", new Class[] { UUID.class });
-             //    tmp = InsecureBluetooth.createRfcommSocketToServiceRecord(device, "00001101-0000-1000-8000-00805F9B34FB", true);
-                 mSocket = con_dev.createInsecureRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
-                 final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-                 device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
-                 return (BluetoothSocket) m.invoke(device, MY_UUID);
-                 }
-                 catch (Exception e)
-                 {
-                     Log.e(TAG, "Could not create Insecure RFComm Connection",e);
-                 }
-                 } return con_dev.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+                //    tmp = InsecureBluetooth.createRfcommSocketToServiceRecord(device, "00001101-0000-1000-8000-00805F9B34FB", true);
+                mSocket = con_dev.createInsecureRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+                final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+                device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+                return (BluetoothSocket) m.invoke(device, MY_UUID);
             }
+            catch (Exception e)
+            {
+                Log.e(TAG, "Could not create Insecure RFComm Connection",e);
+            }
+        } return con_dev.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+    }
 
 
     private void getWaiterData() {
@@ -1905,7 +4645,7 @@ public class BillSectionActivity extends AppCompatActivity {
                     break;
                 }
                 else
-                    {
+                {
                     totalInt = +localCursor.getInt(3);
                     Log.e("Toatl", totalInt + "");
                     billSectionOrderList.add(new kitchenOrderItem(
@@ -2085,13 +4825,13 @@ public class BillSectionActivity extends AppCompatActivity {
                                 .doubleValue();
 
                         roundOff.setText(String.valueOf(roundoff));
-                     if(!alreadyDiscount.isEmpty())
-                     {
-                         dicount.setText(String.valueOf(alreadyDiscount));
-                     }else{
+                        if(!alreadyDiscount.isEmpty())
+                        {
+                            dicount.setText(String.valueOf(alreadyDiscount));
+                        }else{
 
-                         dicount.setText(String.valueOf(strDiscount));
-                     }
+                            dicount.setText(String.valueOf(strDiscount));
+                        }
 
 
                         Double total_tax = BigDecimal.valueOf(bill_tax)

@@ -268,10 +268,17 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_menu);
-      //  startService(new Intent(NewActivity.this , BlueServiceOnce.class));
+        //  startService(new Intent(NewActivity.this , BlueServiceOnce.class));
         toolbar_ = (Toolbar) findViewById(R.id.toolbar_);
-         startService(new Intent(this , BlueServiceOnce.class));
+        startService(new Intent(this , BlueServiceOnce.class));
         toolbar_.setNavigationIcon(R.drawable.ic_arrow);
+        toolbar_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(NewActivity.this, "back clicked", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
         kotManager = new SessionManager(this);
         chn_head_footer = findViewById(R.id.chn_head_footer);
         chn_head_footer.setOnClickListener(new View.OnClickListener() {
@@ -492,24 +499,122 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View view) {
 
-                    Date currentDate = Calendar.getInstance().getTime();
-                    int hr = currentDate.getHours();
-                    int min = currentDate.getMinutes();
-                    int sec = currentDate.getSeconds();
-                    float total_tax = 0;
+                Date currentDate = Calendar.getInstance().getTime();
+                int hr = currentDate.getHours();
+                int min = currentDate.getMinutes();
+                int sec = currentDate.getSeconds();
+                float total_tax = 0;
 
-                    Cursor localCursor = orderDatabseHelper.getAllCardOrderData();
+                Cursor localCursor = orderDatabseHelper.getAllCardOrderData();
 
 //                Cursor localKOTCursor = rderDatabseHelper.getAllKitchenOrderData();
-                    if (localCursor.getCount() != 0) {
-                        int p=0;
-                        Cursor localCurrentDataCursor = orderDatabseHelper.getDataOfSelectedTable(variables.selecetd_table_data.getT_id(), variables.tableNumber);
-                        if (localCurrentDataCursor.getCount() == 0) {
-                            while (localCursor.moveToNext()) {
-                                if (localCursor.getInt(3) != 0) {
+                if (localCursor.getCount() != 0) {
+                    int p=0;
+                    Cursor localCurrentDataCursor = orderDatabseHelper.getDataOfSelectedTable(variables.selecetd_table_data.getT_id(), variables.tableNumber);
+                    if (localCurrentDataCursor.getCount() == 0) {
+                        while (localCursor.moveToNext()) {
+                            if (localCursor.getInt(3) != 0) {
 
                                 //    Kot_items[i] =    localCursor.getString(1);
-                                  //  Kot_items.put(p,new Kot_items(localCursor.getString(1),localCursor.getInt(2)));
+                                //  Kot_items.put(p,new Kot_items(localCursor.getString(1),localCursor.getInt(2)));
+                                orderDatabseHelper.insertTableItemOrderInformation(
+                                        variables.selecetd_table_data.getT_id(),
+                                        localCursor.getString(0),
+                                        localCursor.getString(1),
+                                        localCursor.getInt(2),
+                                        localCursor.getInt(3),
+                                        localCursor.getInt(4),
+                                        localCursor.getFloat(8),
+                                        localCursor.getFloat(9),
+                                        localCursor.getFloat(10),
+                                        localCursor.getFloat(11),
+                                        localCursor.getFloat(12),
+                                        localCursor.getFloat(13),
+                                        variables.tableNumber,
+                                        localCursor.getFloat(14),
+                                        localCursor.getFloat(15),
+                                        localCursor.getString(16),
+                                        localCursor.getString(17),
+                                        localCursor.getString(18),
+                                        localCursor.getString(19),
+                                        localCursor.getString(20),
+                                        localCursor.getString(21)
+                                );
+                                if (localCursor.getFloat(14) == 0) {
+                                    total_tax += localCursor.getFloat(11) + localCursor.getFloat(12) + localCursor.getFloat(13);
+                                } else {
+                                    total_tax += localCursor.getFloat(15);
+                                }
+
+                            }
+                            p++;
+                        }
+
+                        orderDatabseHelper.insertOrderListItem(
+                                ++variables.order_no,
+                                ++variables.receipt_no,
+                                "Dine In",
+                                variables.selecetd_table_data.getDin_area(),
+                                hr + ":" + min + ":" + sec,
+                                "",
+                                variables.total_price,
+                                variables.total_price,
+                                "running",
+                                "Datta",
+                                variables.selecetd_table_data.getT_id(),
+                                total_tax,
+                                variables.tableNumber,
+                                0,
+                                variables.selected_waiter_data.getWaiter_id()
+                        );
+
+                        orderDatabseHelper.updatReceiptAndOrderNoTable(
+                                String.valueOf(variables.order_no),
+                                String.valueOf(variables.receipt_no),
+                                String.valueOf(variables.initial_receipt_no));
+
+                        variables.initial_receipt_no = variables.receipt_no;
+
+                        int due = Paper.book().read("total_pending");
+                        Paper.book().write("total_pending", due + variables.total_price);
+                    } else {
+                        localCurrentDataCursor.moveToNext();
+                        total_tax = localCurrentDataCursor.getFloat(11);
+
+                        int due = Paper.book().read("total_pending");
+                        Paper.book().write("total_pending", due + variables.total_price);
+
+
+                        Log.d(TAG, "onClick: getting cad item count " + localCursor.getCount());
+                        while (localCursor.moveToNext()) {
+                            Log.d(TAG, " onClick: card count hellow ");
+                            flagOrderList = 0;
+                            Cursor localTableItemOrderInformationCursor = orderDatabseHelper.getTableItemOrderInformation(variables.selecetd_table_data.getT_id(), variables.tableNumber);
+                            while (localTableItemOrderInformationCursor.moveToNext()) {
+                                if (localCursor.getString(0).equals(localTableItemOrderInformationCursor.getString(1))) {
+
+                                    orderDatabseHelper.updatTableItemOrderInformation(
+                                            variables.selecetd_table_data.getT_id(),
+                                            localCursor.getString(0),
+                                            localCursor.getString(1),
+                                            localCursor.getInt(2),
+                                            localCursor.getInt(3) + localTableItemOrderInformationCursor.getInt(4),
+                                            localCursor.getInt(4) + localTableItemOrderInformationCursor.getInt(5),
+                                            localCursor.getFloat(11) + localTableItemOrderInformationCursor.getFloat(9),
+                                            localCursor.getFloat(12) + localTableItemOrderInformationCursor.getFloat(10),
+                                            localCursor.getFloat(13) + localTableItemOrderInformationCursor.getFloat(11),
+                                            localCursor.getFloat(15) + localTableItemOrderInformationCursor.getFloat(14),
+                                            variables.tableNumber
+                                    );
+                                    flagOrderList = 1;
+                                    break;
+                                }
+                            }
+
+
+
+                            if (flagOrderList == 0) {
+                                if (localCursor.getInt(3) != 0) {
                                     orderDatabseHelper.insertTableItemOrderInformation(
                                             variables.selecetd_table_data.getT_id(),
                                             localCursor.getString(0),
@@ -533,211 +638,113 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                                             localCursor.getString(20),
                                             localCursor.getString(21)
                                     );
-                                    if (localCursor.getFloat(14) == 0) {
-                                        total_tax += localCursor.getFloat(11) + localCursor.getFloat(12) + localCursor.getFloat(13);
-                                    } else {
-                                        total_tax += localCursor.getFloat(15);
-                                    }
-
                                 }
-                               p++;
+
+                            }
+                            if (localCursor.getFloat(14) == 0) {
+                                total_tax += localCursor.getFloat(11) + localCursor.getFloat(12) + localCursor.getFloat(13);
+                            } else {
+                                total_tax += localCursor.getFloat(15);
                             }
 
-                            orderDatabseHelper.insertOrderListItem(
-                                    ++variables.order_no,
-                                    ++variables.receipt_no,
-                                    "Dine In",
-                                    variables.selecetd_table_data.getDin_area(),
-                                    hr + ":" + min + ":" + sec,
-                                    "",
-                                    variables.total_price,
-                                    variables.total_price,
-                                    "running",
-                                    "Datta",
+                        }
+                        orderDatabseHelper.updateOrderListItem(
+                                variables.selecetd_table_data.getT_id(),
+                                hr + ":" + min + ":" + sec,
+                                variables.total_price,
+                                variables.total_price,
+                                "running",
+                                total_tax,
+                                variables.tableNumber
+                        );
+                    }
+
+                    orderDatabseHelper.trancateCardOrder();
+
+                    localAllCardOrderFoodList.clear();
+                    cardAdapter = new CardAdapter(NewActivity.this, localAllCardOrderFoodList);
+                    card_recyclerview = (RecyclerView) findViewById(R.id.card_recyclerview);
+                    card_recyclerview.setHasFixedSize(true);
+                    LinearLayoutManager cardlinearLayoutManager = new LinearLayoutManager(NewActivity.this);
+                    cardlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    card_recyclerview.setLayoutManager(cardlinearLayoutManager);
+                    card_recyclerview.setAdapter(cardAdapter);
+
+                    //variables.total_price_kot +=variables.total_price;
+                    NewActivity.txtTotal.setText(String.valueOf(variables.total_price));
+
+                    localCursor = orderDatabseHelper.getTableItemOrderInformation(variables.selecetd_table_data.getT_id(), variables.tableNumber);
+                    localAllKitchenOrderFoodlListbill = localAllKitchenOrderFoodlList;
+                    localAllKitchenOrderFoodlList.clear();
+                    int i = 0;
+                    if (localCursor.getCount() != 0) {
+                        helpher.updateTableStatus(variables.selecetd_table_data.getT_id(), "allocated");
+                    }
+                    while (localCursor.moveToNext()) {
+                        localAllKitchenOrderFoodlList.add(new kitchenOrderItem(
+                                        localCursor.getString(1),
+                                        localCursor.getString(2),
+                                        ++i,
+                                        localCursor.getInt(3),
+                                        localCursor.getInt(4),
+                                        localCursor.getInt(5),
+                                        localCursor.getInt(6),
+                                        localCursor.getInt(7),
+                                        localCursor.getInt(8),
+                                        localCursor.getInt(9),
+                                        localCursor.getInt(10),
+                                        localCursor.getInt(11),
+                                        localCursor.getInt(13),
+                                        localCursor.getInt(15)
+                                )
+                        );
+                    }
+
+                    Cursor localTableDetailsCurdor = helpher.getTableDetails(variables.selecetd_table_data.getT_id());
+                    if (localTableDetailsCurdor.getCount() != 0) {
+                        localTableDetailsCurdor.moveToNext();
+                        if (!localTableDetailsCurdor.getString(8).equals("yes") & variables.tableNumber.equals("2")) {
+                            helpher.updateSplittedStatus(
                                     variables.selecetd_table_data.getT_id(),
-                                    total_tax,
-                                    variables.tableNumber,
-                                    0,
+                                    "yes",
+                                    variables.selected_waiter_data.getWaiter_id(),
                                     variables.selected_waiter_data.getWaiter_id()
                             );
-
-                            orderDatabseHelper.updatReceiptAndOrderNoTable(
-                                    String.valueOf(variables.order_no),
-                                    String.valueOf(variables.receipt_no),
-                                    String.valueOf(variables.initial_receipt_no));
-
-                            variables.initial_receipt_no = variables.receipt_no;
-
-                            int due = Paper.book().read("total_pending");
-                            Paper.book().write("total_pending", due + variables.total_price);
-                        } else {
-                            localCurrentDataCursor.moveToNext();
-                            total_tax = localCurrentDataCursor.getFloat(11);
-
-                            int due = Paper.book().read("total_pending");
-                            Paper.book().write("total_pending", due + variables.total_price);
-
-
-                            Log.d(TAG, "onClick: getting cad item count " + localCursor.getCount());
-                            while (localCursor.moveToNext()) {
-                                Log.d(TAG, " onClick: card count hellow ");
-                                flagOrderList = 0;
-                                Cursor localTableItemOrderInformationCursor = orderDatabseHelper.getTableItemOrderInformation(variables.selecetd_table_data.getT_id(), variables.tableNumber);
-                                while (localTableItemOrderInformationCursor.moveToNext()) {
-                                    if (localCursor.getString(0).equals(localTableItemOrderInformationCursor.getString(1))) {
-
-                                        orderDatabseHelper.updatTableItemOrderInformation(
-                                                variables.selecetd_table_data.getT_id(),
-                                                localCursor.getString(0),
-                                                localCursor.getString(1),
-                                                localCursor.getInt(2),
-                                                localCursor.getInt(3) + localTableItemOrderInformationCursor.getInt(4),
-                                                localCursor.getInt(4) + localTableItemOrderInformationCursor.getInt(5),
-                                                localCursor.getFloat(11) + localTableItemOrderInformationCursor.getFloat(9),
-                                                localCursor.getFloat(12) + localTableItemOrderInformationCursor.getFloat(10),
-                                                localCursor.getFloat(13) + localTableItemOrderInformationCursor.getFloat(11),
-                                                localCursor.getFloat(15) + localTableItemOrderInformationCursor.getFloat(14),
-                                                variables.tableNumber
-                                        );
-                                        flagOrderList = 1;
-                                        break;
-                                    }
-                                }
-
-
-
-                                if (flagOrderList == 0) {
-                                    if (localCursor.getInt(3) != 0) {
-                                        orderDatabseHelper.insertTableItemOrderInformation(
-                                                variables.selecetd_table_data.getT_id(),
-                                                localCursor.getString(0),
-                                                localCursor.getString(1),
-                                                localCursor.getInt(2),
-                                                localCursor.getInt(3),
-                                                localCursor.getInt(4),
-                                                localCursor.getFloat(8),
-                                                localCursor.getFloat(9),
-                                                localCursor.getFloat(10),
-                                                localCursor.getFloat(11),
-                                                localCursor.getFloat(12),
-                                                localCursor.getFloat(13),
-                                                variables.tableNumber,
-                                                localCursor.getFloat(14),
-                                                localCursor.getFloat(15),
-                                                localCursor.getString(16),
-                                                localCursor.getString(17),
-                                                localCursor.getString(18),
-                                                localCursor.getString(19),
-                                                localCursor.getString(20),
-                                                localCursor.getString(21)
-                                        );
-                                    }
-
-                                }
-                                if (localCursor.getFloat(14) == 0) {
-                                    total_tax += localCursor.getFloat(11) + localCursor.getFloat(12) + localCursor.getFloat(13);
-                                } else {
-                                    total_tax += localCursor.getFloat(15);
-                                }
-
-                            }
-                            orderDatabseHelper.updateOrderListItem(
-                                    variables.selecetd_table_data.getT_id(),
-                                    hr + ":" + min + ":" + sec,
-                                    variables.total_price,
-                                    variables.total_price,
-                                    "running",
-                                    total_tax,
-                                    variables.tableNumber
-                            );
+                            splitflag = 1;
                         }
-
-                        orderDatabseHelper.trancateCardOrder();
-
-                        localAllCardOrderFoodList.clear();
-                        cardAdapter = new CardAdapter(NewActivity.this, localAllCardOrderFoodList);
-                        card_recyclerview = (RecyclerView) findViewById(R.id.card_recyclerview);
-                        card_recyclerview.setHasFixedSize(true);
-                        LinearLayoutManager cardlinearLayoutManager = new LinearLayoutManager(NewActivity.this);
-                        cardlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        card_recyclerview.setLayoutManager(cardlinearLayoutManager);
-                        card_recyclerview.setAdapter(cardAdapter);
-
-                        //variables.total_price_kot +=variables.total_price;
-                        NewActivity.txtTotal.setText(String.valueOf(variables.total_price));
-
-                        localCursor = orderDatabseHelper.getTableItemOrderInformation(variables.selecetd_table_data.getT_id(), variables.tableNumber);
-                        localAllKitchenOrderFoodlListbill = localAllKitchenOrderFoodlList;
-                        localAllKitchenOrderFoodlList.clear();
-                        int i = 0;
-                        if (localCursor.getCount() != 0) {
-                            helpher.updateTableStatus(variables.selecetd_table_data.getT_id(), "allocated");
-                        }
-                        while (localCursor.moveToNext()) {
-                            localAllKitchenOrderFoodlList.add(new kitchenOrderItem(
-                                            localCursor.getString(1),
-                                            localCursor.getString(2),
-                                            ++i,
-                                            localCursor.getInt(3),
-                                            localCursor.getInt(4),
-                                            localCursor.getInt(5),
-                                            localCursor.getInt(6),
-                                            localCursor.getInt(7),
-                                            localCursor.getInt(8),
-                                            localCursor.getInt(9),
-                                            localCursor.getInt(10),
-                                            localCursor.getInt(11),
-                                            localCursor.getInt(13),
-                                            localCursor.getInt(15)
-                                    )
-                            );
-                        }
-
-                        Cursor localTableDetailsCurdor = helpher.getTableDetails(variables.selecetd_table_data.getT_id());
-                        if (localTableDetailsCurdor.getCount() != 0) {
-                            localTableDetailsCurdor.moveToNext();
-                            if (!localTableDetailsCurdor.getString(8).equals("yes") & variables.tableNumber.equals("2")) {
-                                helpher.updateSplittedStatus(
-                                        variables.selecetd_table_data.getT_id(),
-                                        "yes",
-                                        variables.selected_waiter_data.getWaiter_id(),
-                                        variables.selected_waiter_data.getWaiter_id()
-                                );
-                                splitflag = 1;
-                            }
-                        }
+                    }
 
 
-                        kotAdapter = new KotAdapter(NewActivity.this, localAllKitchenOrderFoodlList);
-                        kot_recyclerview = (RecyclerView) findViewById(R.id.kot_recyclerview);
-                        kot_recyclerview.setHasFixedSize(true);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewActivity.this);
-                        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        kot_recyclerview.setLayoutManager(linearLayoutManager);
-                        kot_recyclerview.setAdapter(kotAdapter);
+                    kotAdapter = new KotAdapter(NewActivity.this, localAllKitchenOrderFoodlList);
+                    kot_recyclerview = (RecyclerView) findViewById(R.id.kot_recyclerview);
+                    kot_recyclerview.setHasFixedSize(true);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewActivity.this);
+                    linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    kot_recyclerview.setLayoutManager(linearLayoutManager);
+                    kot_recyclerview.setAdapter(kotAdapter);
 //                        for(int px =0; p<localAllKitchenOrderFoodlListbill.size();px++)
 //                        {
 //                              kot_items_bill_nodes.add(new Kot_Items_Bill_Node(localAllKitchenOrderFoodlList.get(px).getMname() , localAllCardOrderFoodList.get(px).getQuantity()));
 //                        }
-                        selectedHashItemList.clear();
-                        cardAdapter.notifyDataSetChanged();
-                    } else {
-                        Toast.makeText(NewActivity.this, "Atleast One item should be selected", Toast.LENGTH_SHORT).show();
-                    }
+                    selectedHashItemList.clear();
+                    cardAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(NewActivity.this, "Atleast One item should be selected", Toast.LENGTH_SHORT).show();
+                }
 
                 if(kotManager.getKeyBillToken())
                 {
                     kot_before = "          TOKEN       \n";
 //                    if(localCursor.getCount() !=0)
 //                    {
-                        int k=0;
-                        for(;k<kot_items_bill_nodes.size();k++)
-                        {
-                            String s = kot_items_bill_nodes.get(k).getItem_node();
-                            Log.e("elements are",""+kot_items_bill_nodes.get(k).getItem_node());
-                            kot_before = kot_before + kot_items_bill_nodes.get(k).getItem_node()+" :"+kot_items_bill_nodes.get(k).getitem_qtynode()+"\n";
+                    int k=0;
+                    for(;k<kot_items_bill_nodes.size();k++)
+                    {
+                        String s = kot_items_bill_nodes.get(k).getItem_node();
+                        Log.e("elements are",""+kot_items_bill_nodes.get(k).getItem_node());
+                        kot_before = kot_before + kot_items_bill_nodes.get(k).getItem_node()+" :"+kot_items_bill_nodes.get(k).getitem_qtynode()+"\n";
 
-                        }
+                    }
 
 //                        for(int k=0;k<kot_items_bill_nodes.size();k++)
 //                        {
@@ -781,45 +788,45 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 //                              //  kot_items_bill_nodes.remove(k);
 //                            }
 //                        }
-                       // kot_before =null;
+                    // kot_before =null;
 //                        kot_items_bill_nodes.clear();
-                    }
-                    kot_items_bill_nodes.clear();
+                }
+                kot_items_bill_nodes.clear();
 //                    String Header = kot_before;
-                    if(localCursor.getCount() !=0)
-                    {
-                        String lang = getString(R.string.bluetooth_strLang);
+                if(localCursor.getCount() !=0)
+                {
+                    String lang = getString(R.string.bluetooth_strLang);
 
 
-                        byte[] cmd = new byte[3];
-                        cmd[0] = 0x1b;
-                        cmd[1] = 0x21;
+                    byte[] cmd = new byte[3];
+                    cmd[0] = 0x1b;
+                    cmd[1] = 0x21;
 //                        kot_before = null;
-                        if ((lang.compareTo("en")) == 0) {
-                            cmd[2] |= 0x10;
-                            monceService.write(cmd);           //??????????
-                            //monceService.sendMessage("Restaurant!", "GBK");
-                            cmd[2] &= 0xEF;
-                            monceService.write(cmd);//??????????????
+                    if ((lang.compareTo("en")) == 0) {
+                        cmd[2] |= 0x10;
+                        monceService.write(cmd);           //??????????
+                        //monceService.sendMessage("Restaurant!", "GBK");
+                        cmd[2] &= 0xEF;
+                        monceService.write(cmd);//??????????????
 
-                            // localCursor = orderDatabseHelper.getTableItemOrderInformation(variables.selecetd_table_data.getT_id(), variables.tableNumber);
+                        // localCursor = orderDatabseHelper.getTableItemOrderInformation(variables.selecetd_table_data.getT_id(), variables.tableNumber);
 
-                            monceService.sendMessage(kot_before, "GBK");
-                        } else if ((lang.compareTo("ch")) == 0) {
-                            cmd[2] |= 0x10;
-                            monceService.write(cmd);           //??????????
+                        monceService.sendMessage(kot_before, "GBK");
+                    } else if ((lang.compareTo("ch")) == 0) {
+                        cmd[2] |= 0x10;
+                        monceService.write(cmd);           //??????????
 //                    mService.sendMessage("???????\n", "GBK");
-                            cmd[2] &= 0xEF;
-                            monceService.write(cmd);           //??????????????
-                            monceService.sendMessage(kot_before, "GBK");
+                        cmd[2] &= 0xEF;
+                        monceService.write(cmd);           //??????????????
+                        monceService.sendMessage(kot_before, "GBK");
 
-                        }
                     }
-
-                    //sfdgfdgdfgdfg++++++++++++++++++++++
                 }
 
-            });
+                //sfdgfdgdfgdfg++++++++++++++++++++++
+            }
+
+        });
 
 
         bt_card.setOnClickListener(new View.OnClickListener() {
@@ -1213,7 +1220,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
         local = orderDatabseHelper.getWaiterWithDiscount();
         if (local != null && local.getCount() > 0) {
             ForWaiterDetails waiterDetails = orderDatabseHelper.getDiscountByTableF(strNewWaiterId);
-           // ForWaiterDetails waiterDetails = orderDatabseHelper.getDiscountByTableF(strTableNo);
+            // ForWaiterDetails waiterDetails = orderDatabseHelper.getDiscountByTableF(strTableNo);
             String strWaiterId = waiterDetails.getWaiterId();
             String strWaiterNam = waiterDetails.getWaiterName();
             String strDiscoun = waiterDetails.getDiscountAmo();
@@ -1370,7 +1377,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                 db.getWritableDatabase();
                 String Header =
                         //"  Restaurant! \n"
-                                 "Items                Qty\n";
+                        "Items                Qty\n";
                 Cursor localCursor = db.getTableItemOrderInformation(variables.selecetd_table_data.getT_id(), variables.tableNumber);
                 bill = Header;
                 int i = 0;
@@ -1380,7 +1387,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                     if (s.length()== 1) {
                         s = s.substring(0, 1)+"             ";
                     } else if(s.length()==2){
-                     //   for (int j = s.length() - 12; j <= s.length(); j++)
+                        //   for (int j = s.length() - 12; j <= s.length(); j++)
                         s = s.substring(0, 2) +"            ";
                     }else if(s.length()==3){
                         s = s.substring(0, 3) +"           ";
@@ -1546,7 +1553,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
                         Log.d(TAG, "onItemClick: card is empty and vat is zero " + (Float.parseFloat(localSelectedFood.getItem_rate1()) * sgst) / 100 + " " + (Float.parseFloat(localSelectedFood.getItem_rate1()) * cgst) / 100 + " vat" + vat);
                     } else
-                        {
+                    {
                         orderDatabseHelper.insertCardOrder(localSelectedFood.getM_id(),
                                 localSelectedFood.getM_name(),
                                 Integer.parseInt(localSelectedFood.getItem_rate1()),
@@ -1956,7 +1963,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
                         Log.d(TAG, "onItemClick: card is empty and vat is zero " + (Float.parseFloat(localSelectedFood.getItem_rate1()) * sgst) / 100 + " " + (Float.parseFloat(localSelectedFood.getItem_rate1()) * cgst) / 100 + " vat" + vat);
                     } else
-                        {
+                    {
                         orderDatabseHelper.insertCardOrder(localSelectedFood.getM_id(),
                                 localSelectedFood.getM_name(),
                                 Integer.parseInt(localSelectedFood.getItem_rate1()),
@@ -1981,7 +1988,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                                 localSelectedFood.getDepartment()
 
                         );
-                       //     kot_items_bill_nodes.addLast(new Kot_Items_Bill_Node(localSelectedFood.getM_name() , localSelectedFood.getQuantity()));
+                        //     kot_items_bill_nodes.addLast(new Kot_Items_Bill_Node(localSelectedFood.getM_name() , localSelectedFood.getQuantity()));
 //                            if(kot_items_bill_nodes.size() !=0)
 //                            {
 //                                for(int p1=0;p1<kot_items_bill_nodes.size();p1++) {
@@ -1996,8 +2003,8 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 
 
 
-                            Toast.makeText(NewActivity.this, "we aree vvat localCursor.moveToNext()", Toast.LENGTH_SHORT).show();
-                     //   kot_before = localSelectedFood.getM_name() + ""+ localSelectedFood.getItem_rate1();
+                        Toast.makeText(NewActivity.this, "we aree vvat localCursor.moveToNext()", Toast.LENGTH_SHORT).show();
+                        //   kot_before = localSelectedFood.getM_name() + ""+ localSelectedFood.getItem_rate1();
 //                        kot_before = localSelectedFood.getM_name() +":"+localSelectedFood.getQuantity();
 //                        bill = kot_before;
                         Log.d(TAG, "onItemClick: card is empty but vat!=0 " + (Float.parseFloat(localSelectedFood.getItem_rate1()) * Float.parseFloat(localSelectedFood.getVat())) / 100 + " " + sgst + " " + cgst);
@@ -2006,11 +2013,11 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                     //existing here /second time also
                     while (localCursor.moveToNext()) {
                         Log.d(TAG, "onItemClick: existing item in table " + localCursor.getInt(0) + " " + localCursor.getString(1) + " " + localCursor.getString(2) + " " + localCursor.getString(3));
- /*not for 2itms*/         if (localCursor.getInt(0) == Integer.parseInt(localSelectedFood.getM_id().trim())) {
+                        /*not for 2itms*/         if (localCursor.getInt(0) == Integer.parseInt(localSelectedFood.getM_id().trim())) {
                             Log.d(TAG, "onItemClick: Inside while loop " + localCursor.getInt(0) + " " + Integer.parseInt(localSelectedFood.getM_id()));
                             String localId = localCursor.getString(0);
                             String localItemName = localCursor.getString(1);
-                       //     kot_before = localSelectedFood.getM_name() + ""+ localSelectedFood.getQuantity();
+                            //     kot_before = localSelectedFood.getM_name() + ""+ localSelectedFood.getQuantity();
                             int localRate = localCursor.getInt(2);
 //                            kot_before = localItemName +":"+localRate;
 //                            bill = kot_before;
@@ -2119,7 +2126,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                         //runs even when have 2 items /one time for 2
                         if (localSelectedFood.getVat().equals("") || localSelectedFood.getVat().equals("0")) {
                             Log.d(TAG, "onItemClick: vat is zero " + localSelectedFood.getVat());
-                         //   kot_before = localSelectedFood.getM_name() + ""+ localSelectedFood.getQuantity();
+                            //   kot_before = localSelectedFood.getM_name() + ""+ localSelectedFood.getQuantity();
                             orderDatabseHelper.insertCardOrder(localSelectedFood.getM_id(),
                                     localSelectedFood.getM_name(),
                                     Integer.parseInt(localSelectedFood.getItem_rate1()),
@@ -2157,7 +2164,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
 //                                kot_before = localSelectedFood.getM_id() +" : "+ localSelectedFood.getQuantity() +"\n";
 //                                bill = kot_before;
 //                            }
-                     //       kot_items_bill_nodes.addLast(new Kot_Items_Bill_Node(localSelectedFood.getM_name() , localSelectedFood.getQuantity()));
+                            //       kot_items_bill_nodes.addLast(new Kot_Items_Bill_Node(localSelectedFood.getM_name() , localSelectedFood.getQuantity()));
 //                            if(kot_items_bill_nodes.size() !=0)
 //                            {
 //                                for(int p1=0;p1<kot_items_bill_nodes.size();p1++) {
@@ -2182,7 +2189,7 @@ public class NewActivity extends AppCompatActivity implements AdapterView.OnItem
                             Log.d(TAG, "onItemClick: inserting and vat is zero not in while loop  " + (Float.parseFloat(localSelectedFood.getItem_rate1()) * sgst) / 100 + " " + (Float.parseFloat(localSelectedFood.getItem_rate1()) * cgst) / 100 + " vat " + vat);
 
                         } else
-                            {
+                        {
                             Log.d(TAG, "onItemClick: vat is non zero" + localSelectedFood.getVat());
                             orderDatabseHelper.insertCardOrder(localSelectedFood.getM_id(),
                                     localSelectedFood.getM_name(),
