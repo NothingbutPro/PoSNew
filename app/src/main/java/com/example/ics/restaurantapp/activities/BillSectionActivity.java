@@ -528,7 +528,8 @@ public class BillSectionActivity extends AppCompatActivity {
                 if (!alreadyDiscount.isEmpty()) {
                     dicount.setText(String.valueOf(alreadyDiscount));
                 }
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 dicount.setText(String.valueOf(0.0));
             }
@@ -2683,14 +2684,12 @@ public class BillSectionActivity extends AppCompatActivity {
                             if(sessionManager.getKeyBillResType2().length() !=0 )
                             {
 
-                                monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                                monceService.sendMessage("     "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n"+Addressbill2+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
                             }
 
                             //     monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                        }
-
-                        else {
-                            monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+                        } else {
+                            monceService.sendMessage("     "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
                         }
                         //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
                     }
@@ -4178,14 +4177,14 @@ public class BillSectionActivity extends AppCompatActivity {
                         }
                         //  monceService.sendMessage("        "+sessionManager.getKeyBillResName()+" \n" + "    "+sessionManager.getKeyBillResType()+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
                     }
-                    else{
-                        monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
-                    }
+//                    else{
+//                        monceService.sendMessage("          "+sessionManager.getKeyBillResName()+" \n"+Addressbill1+"\n        " + htmlAsSpanned + "\n------------------------", "GBK");
+//                    }
                     //
                     //       mService.sendMessage("       SAGAR VIEW\n" + "    5-STAR RESTAURANT\n" + "       " + htmlAsSpanned + "\n------------------------", "GBK");
 
                     // mService.sendMessage(bill, "GBK");
-                    monceService.sendMessage(bill, "GBK");
+                //       monceService.sendMessage(bill, "GBK");
                 } else if ((lang.compareTo("ch")) == 0) {
                     // Bold
                     format[2] = ((byte) (0x10 | arrayOfByte1[2]));
